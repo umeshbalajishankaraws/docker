@@ -6,7 +6,7 @@ pipeline {
          sh "
          echo "+++++++cloing repo from git started+++++++"
         git([url: 'https://github.com/umeshbalajishankaraws/docker.git', branch: 'master'])
-        sh "echo "+++++++cloing repo from git completed+++++++"
+        sh echo "+++++++cloing repo from git completed+++++++"
         "
       }
     }
@@ -15,7 +15,7 @@ pipeline {
      sh "
      echo "+++++++Docker Image Builg Started+++++++"
      sh "sudo docker build -t nginx:v1 . > build.log"
-     sh "echo "+++++++Docker Image Builg Completed+++++++"
+     sh echo "+++++++Docker Image Builg Completed+++++++"
      "
           }
       }   
