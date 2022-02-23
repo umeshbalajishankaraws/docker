@@ -1,14 +1,9 @@
 pipeline {
-  environment {
-    imagename = "yenigul/hacicenkins"
-    registryCredential = 'yenigul-dockerhub'
-    dockerImage = ''
-  }
   agent any
   stages {
     stage('Cloning Git') {
       steps {
- //       git([url: 'https://github.com/ismailyenigul/hacicenkins.git', branch: 'master'])
+        git([url: 'https://github.com/umeshbalajishankaraws/docker.git', branch: 'master'])
  	checkout scm
 
       }
@@ -16,7 +11,7 @@ pipeline {
     stage('Building image') {
       steps{
      
-      sh "echo AWSKEY && sleep 10"
+      sh "sudo docker build -t image:v1 ."
 
 
           }
