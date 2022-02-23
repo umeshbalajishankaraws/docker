@@ -1,32 +1,30 @@
 pipeline {
+    
   agent any
   stages {
     stage('Cloning Git') {
       steps {
-         sh "
-         echo "+++++++cloing repo from git started+++++++"
-        git([url: 'https://github.com/umeshbalajishankaraws/docker.git', branch: 'master'])
-        sh echo "+++++++cloing repo from git completed+++++++"
-        "
+        git([url: 'https://github.com/umeshbalajishankaraws/docker', branch: 'master'])
+        
       }
     }
     stage('Building image') {
       steps{
-     sh "
-     echo "+++++++Docker Image Builg Started+++++++"
-     sh "sudo docker build -t nginx:v1 . > build.log"
-     sh echo "+++++++Docker Image Builg Completed+++++++"
-     "
+     
+      sh "sudo docker build -t nginx_custom:v1 ."
           }
-      }   
-     stage('Docker Creation') {
+      }
+    stage('List image') {
       steps{
-     sh "
-     echo "Docker create Build Started"
-     sh sudo docker run -dt --name nginx --publish 9000:80 nginx_webserver:v1
-     sh echo "Docker create Build Completed"
-     "
+     
+      sh "sudo docker images"
           }
-      } 
+      }
+    stage('Create a container from the image') {
+      steps{
+     
+      sh "sudo docker run -td --name nginx --publish 8081:80 nginx_custom:v1"
+          }
+      }
   }
 }
